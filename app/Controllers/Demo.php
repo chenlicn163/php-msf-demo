@@ -9,6 +9,7 @@
 namespace App\Controllers;
 
 use PG\I18N\I18N;
+use PG\MSF\Client\Http\Client;
 use PG\MSF\Controllers\Controller;
 use App\Models\Demo as DemoModel;
 
@@ -26,15 +27,15 @@ class Demo extends Controller
          * @var DemoModel $demoModel
          */
         $demoModel = $this->getObject(DemoModel::class, [1, 2]);
-        $ids       = $demoModel->getMockIds();
+        $ids = $demoModel->getMockIds();
         $this->outputJson($ids);
     }
 
     public function actionTplView()
     {
         $data = [
-            'title'    => 'MSF Demo View',
-            'friends'  => [
+            'title' => 'MSF Demo View',
+            'friends' => [
                 [
                     'name' => 'Rango',
                 ],
@@ -46,7 +47,7 @@ class Demo extends Controller
                 ],
             ]
         ];
-        $this->outputView($data);
+        $this->outputView($data, 'Demo/test');
     }
 
     public function actionSleep()
@@ -71,5 +72,21 @@ class Demo extends Controller
     {
         $result = yield $this->getObject(\PG\MSF\Coroutine\Shell::class)->goExec('ps aux | grep msf');
         $this->output($result);
+    }
+
+
+    public function actionIndex()
+    {
+        /*$this->getContext()->setUserDefined('user', 'test123');
+        $str = $this->getContext()->getUserDefined('user');*/
+        $str = $this->getContext()->getActionName();
+        $this->output($str);
+    }
+
+    public function actionUser()
+    {
+        $str = $this->getContext()->getUserDefined('user');
+        $this->output($str);
+
     }
 }

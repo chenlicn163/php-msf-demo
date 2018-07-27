@@ -14,5 +14,12 @@ use PG\MSF\Controllers\Controller;
 
 class TestBaseController extends Controller
 {
-
+    public function actionIndex()
+    {
+        $client = $this->getObject(Client::class);
+        yield $client->goDnsLookup('http://www.baidu.com/');
+        $sendGet = $client->goGet("/");
+        $result = yield $sendGet;
+        $this->outputView(['html'=>$result['body']]);
+    }
 }

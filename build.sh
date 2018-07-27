@@ -41,8 +41,10 @@ CMD_ARGS=$*
 # default command & build_env
 COMMAND='all'
 BUILD_ENV='.docker'
+# 163
+FROM_IMAGE='hub.c.163.com/xychenli/php7-swoole:latest'
 # 公网
-FROM_IMAGE='registry.cn-hangzhou.aliyuncs.com/pinguo-ops/php-msf-docker:latest'
+#FROM_IMAGE='registry.cn-hangzhou.aliyuncs.com/pinguo-ops/php-msf-docker:latest'
 # 阿里云内网
 #FROM_IMAGE='registry-internal.cn-hangzhou.aliyuncs.com/pinguo-ops/php-msf-docker:latest'
 # 阿里云VPC网络
